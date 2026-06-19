@@ -136,8 +136,7 @@ python src/visual_difficulty_measurer.py --images-dir images/
 python src/make_questions.py --mcq-dir images/ --n-choices 4 --seed 200
 
 # 2. Evaluate with persona Haiku
-python src/evaluate_haiku.py --mcq-dir images/ \
-  --model claude-haiku-4-5-20251001 --seed 200
+python src/evaluate_haiku.py --mcq-dir images/ --model claude-haiku-4-5-20251001 --seed 200
 
 # 3. Level estimator
 python src/split_dataset.py --out-dir images_merged
