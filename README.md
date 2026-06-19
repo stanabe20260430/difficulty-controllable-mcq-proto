@@ -34,9 +34,7 @@ matches the image.
 | `src/evaluate_haiku.py` | Batch-evaluate persona Haiku; log per-level accuracy and answer rows |
 | `src/caption_masker.py` | Vocabulary masking used to implement personas |
 | `src/split_dataset.py` | Merge per-`p` answers and split into train/val/test (70/15/15) |
-| `src/split_personas.py` | Persona hold-out split |
 | `src/train_level_mlp.py` | Train the Level Estimator MLP |
-| `src/predict_level.py` | Predict proficiency (P1/P2/P3) from an answer history |
 | `plot/*.py` | Figures (accuracy bars, language/visual difficulty, level estimator) |
 
 ## Visual axes
@@ -49,13 +47,6 @@ matches the image.
 | `l` | lighting | day | night |
 | `o` | foreground occlusion | none | present |
 
-`a/s/l/o` are expanded factorially (16 corners); `p` is swept separately.
-The people gate (YOLO11x) regenerates an image until the detected count
-matches the target `p`.
-
-File name: `image_{scene}_p{N}_a{}_s{}_l{}_o{}.png` (meta in the matching
-`.json`).
-
 ## Caption generation
 
 For each image, the VLM first writes one **correct** caption (subject,
@@ -67,13 +58,6 @@ the image and regenerated on failure; the leading axis of each caption is
 shuffled to remove positional shortcuts. Language difficulty is set by
 three instruction texts (L1/L2/L3) that specify vocabulary and sentence
 length.
-
-Output `image_..._mcq.json`:
-
-```
-path, scene_idx, p, a, s, l, o
-levels[]: level, style, choices{correct, wrong_subject, wrong_action, wrong_location}
-```
 
 ## Learner simulation (personas)
 
@@ -96,8 +80,6 @@ the MAE metric.
 
 - **Language:** `min_zipf` (lowest-frequency content word), `max_cefr_rank`
   (A1=1 … C2=6), `length`.
-- **Visual:** `person_count`, `max_person_area_ratio`,
-  `non_person_object_count`, `max_non_person_area_ratio`.
 
 ## Models
 
@@ -106,8 +88,7 @@ the MAE metric.
 - Detection: YOLO11x
 - Solver / simulated learner: Claude Haiku 4.5 (Anthropic API)
 
-Runs on a single RTX 4090 (24 GB). CEFR-J is fetched from
-`openlanguageprofiles/olp-en-cefrj`.
+Runs on a single RTX 4090 (24 GB). 
 
 ## Install
 
@@ -118,8 +99,6 @@ python -m spacy download en_core_web_sm
 hf auth login
 export ANTHROPIC_API_KEY=...
 ```
-
-(Or run `setup.sh`.)
 
 ## Run
 
@@ -166,9 +145,6 @@ Top-level keys, each leveled by `L1`/`L2`/`L3` (except `occluders`):
 subjects, actions_single, actions_together, locations_single,
 locations_together, occluders, subject_states, wearing
 ```
-
-`subject_states` (state / dirt / injury) and `wearing` (clothing) are the
-appearance pools used for `wrong_subject`.
 
 ## Target venue
 
