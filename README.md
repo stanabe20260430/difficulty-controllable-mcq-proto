@@ -114,8 +114,8 @@ python src/make_questions.py --mcq-dir images/ --n-choices 4 --seed 200
 python src/evaluate_haiku.py --mcq-dir images/ --model claude-haiku-4-5-20251001 --seed 200
 
 # 3. Level estimator
-python src/split_dataset.py --out-dir images_merged
-python src/train_level_mlp.py --data-dir images_merged
+python src/split_dataset.py --out-dir images/
+python src/train_level_mlp.py --data-dir images/
 python src/predict_level.py --ckpt level_mlp.pt --answers <answers.json>
 
 # 4. Figures
