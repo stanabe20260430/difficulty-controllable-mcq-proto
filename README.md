@@ -21,10 +21,6 @@ matches the image.
   Claude Haiku 4.5 answers the items; its proficiency is approximated by
   vocabulary masking.
 
-Caption vocabulary levels are `L1`/`L2`/`L3` in the code (referred to as
-V1/V2/V3 in the paper). Learner personas are `P1`/`P2`/`P3`
-(beginner/intermediate/advanced).
-
 ## Pipeline
 
 | Script | Role |
