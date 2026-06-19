@@ -103,26 +103,20 @@ export ANTHROPIC_API_KEY=...
 ## Run
 
 ```bash
-# 1. Generate items
-python src/image_generator.py --vocab configs/vocab_leveled.json --scenes 100 --seed 200 --output-dir images/
-python src/mcq_caption_generator.py --images-dir images/ --vocab configs/vocab_leveled.json
+# 1. Generate one image (single scene, all visual axes fixed)
+python src/image_generator.py --vocab configs/vocab_leveled.json \
+  --scenes 1 --p 1 --a 0 --s 0 --l 0 --o 0 --seed 200 --output-dir images/
+
+# 2. Generate captions (1 correct + 3 distractors)
+python src/mcq_caption_generator.py --images-dir images/ \
+  --vocab configs/vocab_leveled.json
+
+# 3. Measure difficulty
 python src/language_difficulty_measurer.py --mcq-dir images/
 python src/visual_difficulty_measurer.py --images-dir images/
+
+# 4. Assemble the MCQ
 python src/make_questions.py --mcq-dir images/ --n-choices 4 --seed 200
-
-# 2. Evaluate with persona Haiku
-python src/evaluate_haiku.py --mcq-dir images/ --model claude-haiku-4-5-20251001 --seed 200
-
-# 3. Level estimator
-python src/split_dataset.py --out-dir images/
-python src/train_level_mlp.py --data-dir images/
-python src/predict_level.py --ckpt level_mlp.pt --answers <answers.json>
-
-# 4. Figures
-python plot/plot_accuracy_bars.py --in images/eval_random.json --out accuracy_bars.pdf
-python plot/plot_language_difficulty.py
-python plot/plot_visual_difficulty.py
-python plot/plot_level_estimator.py
 ```
 
 ## Config files
