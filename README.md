@@ -137,14 +137,6 @@ Wording and parameters are externalized to JSON (`--config` to override).
   depth)
 - `configs/vocab_leveled.json` — leveled scene vocabulary
 
-## vocab_leveled.json
-
-Top-level keys, each leveled by `L1`/`L2`/`L3` (except `occluders`):
-
-```
-subjects, actions_single, actions_together, locations_single,
-locations_together, occluders, subject_states, wearing
-```
 
 ## Target venue
 
