@@ -129,15 +129,15 @@ export ANTHROPIC_API_KEY=...
 
 ```bash
 # 1. Generate items
-python src/image_generator.py --vocab configs/vocab_leveled.json --scenes 100 --seed 42 --output-dir images/
+python src/image_generator.py --vocab configs/vocab_leveled.json --scenes 100 --seed 200 --output-dir images/
 python src/mcq_caption_generator.py --images-dir images/ --vocab configs/vocab_leveled.json
 python src/language_difficulty_measurer.py --mcq-dir images/
 python src/visual_difficulty_measurer.py --images-dir images/
-python src/make_questions.py --mcq-dir images/ --n-choices 4 --seed 1
+python src/make_questions.py --mcq-dir images/ --n-choices 4 --seed 200
 
 # 2. Evaluate with persona Haiku
 python src/evaluate_haiku.py --mcq-dir images/ \
-  --model claude-haiku-4-5-20251001 --seed 1
+  --model claude-haiku-4-5-20251001 --seed 200
 
 # 3. Level estimator
 python src/split_dataset.py --out-dir images_merged
