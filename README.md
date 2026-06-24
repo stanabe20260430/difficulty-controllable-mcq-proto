@@ -28,7 +28,6 @@ matches the image.
 | `src/image_generator.py` | Generate images (FLUX.2-dev NF4) with a YOLO people-count gate |
 | `src/mcq_caption_generator.py` | Generate captions (Qwen3-VL-32B, 4-bit): 1 correct + 3 distractors |
 | `src/language_difficulty_measurer.py` | Measure language difficulty of each caption |
-| `src/visual_difficulty_measurer.py` | Measure visual difficulty (YOLO) of each image |
 | `src/make_questions.py` | Assemble one MCQ per item (shuffle choices) |
 | `src/solver.py` | Answer a single MCQ with a VLM (Claude API) |
 | `src/evaluate_haiku.py` | Batch-evaluate persona Haiku; log per-level accuracy and answer rows |
